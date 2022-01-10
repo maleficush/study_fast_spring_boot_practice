@@ -19,7 +19,7 @@ import org.springframework.core.env.Environment;
 import javax.annotation.PostConstruct;
 
 
-@EnableCaching
+
 @ConfigurationPropertiesScan("com.fast.demo.properties")
 @SpringBootApplication
 public class DemoApplication {
