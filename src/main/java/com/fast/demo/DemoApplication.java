@@ -27,6 +27,9 @@ public class DemoApplication {
     private final MyProperties properties;
     private final StudentService studentService;
 
+    private final String username;
+    private final String password;
+
     // [1] final로 선언
 //    private final String finalValue;
 //    // [1] 생성자에서 property를 읽어와서 final 변수를 초기화
@@ -51,12 +54,17 @@ public class DemoApplication {
                            Environment environment,
                            ApplicationContext context,
                            MyProperties properties,
-                           StudentService studentService) {
+                           StudentService studentService,
+                           @Value("${spring.datasource.username}") String username,
+                           @Value("${spring.datasource.password}") String password
+                           ) {
         this.finalValue = finalValue;
         this.environment = environment;
         this.context = context;
         this.properties = properties;
         this.studentService = studentService;
+        this.username = username;
+        this.password = password;
     }
 
     // PostConstruct를 이용하여 value 가지고 옴
@@ -68,6 +76,8 @@ public class DemoApplication {
         System.out.println("[Environment]" + environment.getProperty("test.finalvalue"));
         System.out.println("[ApplicationContext]" + context.getEnvironment().getProperty("test.finalvalue"));
         System.out.println("[Configuration]" + properties.getValue() + properties.getFinalvalue());
+        System.out.println("[Vault username]" + username);
+        System.out.println("[Vault password]" + password);
     }
 
     @EventListener(ApplicationReadyEvent.class)
